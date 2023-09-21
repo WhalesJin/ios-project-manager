@@ -8,16 +8,12 @@
 import SwiftUI
 
 struct TodoView: View {
-    @ObservedObject var vm = ViewModel()
-    @State private var showingAddView = false
+    @ObservedObject var vm: ViewModel
+    
     init(vm: ViewModel = ViewModel()) {
         self.vm = vm
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.systemBackground
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        NavigationBarConfig
+            .config(backgroundColor: .systemBackground)
     }
     
     var body: some View {        
@@ -32,7 +28,7 @@ struct TodoView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        showingAddView = true
+                        vm.showingAddView = true
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -40,20 +36,22 @@ struct TodoView: View {
             }
         }
         .navigationViewStyle(.stack)
-        .customAlert(isOn: $showingAddView) {
-         TaskAddView(isOn: $showingAddView)
+        .customAlert(isOn: $vm.showingAddView, title: "Todo") {
+            TaskAddView()
+        } leftButton: {
+            Button("Cancel") {
+                vm.showingAddView = false
+            }
+        } rightButton: {
+            Button("Done") {
+                vm.showingAddView = false
+            }
         }
     }
 }
 
 struct TodoView_Previews: PreviewProvider {
     static var previews: some View {
-        TodoView(
-            vm: TodoView.ViewModel(
-                todos: TodoView.ViewModel.dummyTodos,
-                doings: TodoView.ViewModel.dummyDoings,
-                dones: TodoView.ViewModel.dummyDones
-            )
-        )
+        TodoView(vm: TodoView.ViewModel.mock)
     }
 }

@@ -29,10 +29,6 @@ struct ListView: View {
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView(tasks: [
-            Task(title: "제목", content: "내용", date: .now),
-            Task(title: "제목", content: "내용", date: .now),
-            Task(title: "제목", content: "내용", date: .now)
-        ], title: "TODO")
+        ListView(tasks: TodoView.ViewModel.mock.todos, title: "TODO")
     }
 }

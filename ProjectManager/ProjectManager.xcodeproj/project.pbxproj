@@ -14,6 +14,7 @@
 		1F223ACD2ABAE76500EDB1E9 /* TaskAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F223ACC2ABAE76500EDB1E9 /* TaskAddView.swift */; };
 		1F34D9372AB92FB60061A6E1 /* ProjectManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F34D9362AB92FB60061A6E1 /* ProjectManagerApp.swift */; };
 		1F4926172ABB53E5002663A4 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4926162ABB53E5002663A4 /* CustomAlert.swift */; };
+		1F6F240C2ABBCCC0000F04B3 /* NavigationBarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6F240B2ABBCCC0000F04B3 /* NavigationBarConfig.swift */; };
 		3C314EC32AB99D39001BDF45 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3C314EC22AB99D39001BDF45 /* Realm */; };
 		3C314EC52AB99D39001BDF45 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C314EC42AB99D39001BDF45 /* RealmSwift */; };
 		3C314EC82AB99FA9001BDF45 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3C314EC72AB99FA9001BDF45 /* FirebaseFirestore */; };
@@ -34,6 +35,7 @@
 		1F223ACC2ABAE76500EDB1E9 /* TaskAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAddView.swift; sourceTree = "<group>"; };
 		1F34D9362AB92FB60061A6E1 /* ProjectManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectManagerApp.swift; sourceTree = "<group>"; };
 		1F4926162ABB53E5002663A4 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		1F6F240B2ABBCCC0000F04B3 /* NavigationBarConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarConfig.swift; sourceTree = "<group>"; };
 		3C314ECD2AB9A526001BDF45 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3C314ED62ABACC71001BDF45 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		3C314ED82ABACE3F001BDF45 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
@@ -96,11 +98,8 @@
 		1F223ABE2ABAC2A500EDB1E9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F6F240A2ABBC5BC000F04B3 /* TodoView */,
 				1F4926152ABB53D3002663A4 /* Utils */,
-				1F223AC22ABAC3F200EDB1E9 /* TodoView.swift */,
-				3C314ED82ABACE3F001BDF45 /* ListView.swift */,
-				3C314ED62ABACC71001BDF45 /* CellView.swift */,
-				1F223ACC2ABAE76500EDB1E9 /* TaskAddView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -136,8 +135,20 @@
 			isa = PBXGroup;
 			children = (
 				1F4926162ABB53E5002663A4 /* CustomAlert.swift */,
+				1F6F240B2ABBCCC0000F04B3 /* NavigationBarConfig.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		1F6F240A2ABBC5BC000F04B3 /* TodoView */ = {
+			isa = PBXGroup;
+			children = (
+				1F223AC22ABAC3F200EDB1E9 /* TodoView.swift */,
+				3C314ED82ABACE3F001BDF45 /* ListView.swift */,
+				3C314ED62ABACC71001BDF45 /* CellView.swift */,
+				1F223ACC2ABAE76500EDB1E9 /* TaskAddView.swift */,
+			);
+			path = TodoView;
 			sourceTree = "<group>";
 		};
 		C7431EF925F51E1D0094C4CF = {
@@ -159,9 +170,9 @@
 		C7431F0425F51E1D0094C4CF /* ProjectManager */ = {
 			isa = PBXGroup;
 			children = (
+				1F34D9352AB92F8F0061A6E1 /* Application */,
 				1F223ABD2ABAC28C00EDB1E9 /* Presentation */,
 				1F223AB52ABAC17000EDB1E9 /* Domain */,
-				1F34D9352AB92F8F0061A6E1 /* Application */,
 				1F34D9342AB92ED90061A6E1 /* Resources */,
 			);
 			path = ProjectManager;
@@ -253,6 +264,7 @@
 				1F223ABC2ABAC28000EDB1E9 /* TaskUseCases.swift in Sources */,
 				3C314ED72ABACC71001BDF45 /* CellView.swift in Sources */,
 				1F4926172ABB53E5002663A4 /* CustomAlert.swift in Sources */,
+				1F6F240C2ABBCCC0000F04B3 /* NavigationBarConfig.swift in Sources */,
 				1F223ACD2ABAE76500EDB1E9 /* TaskAddView.swift in Sources */,
 				3C314ED92ABACE3F001BDF45 /* ListView.swift in Sources */,
 				1F223AC32ABAC3F200EDB1E9 /* TodoView.swift in Sources */,

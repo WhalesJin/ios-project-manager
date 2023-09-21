@@ -24,6 +24,6 @@ struct CellView: View {
 
 struct CellView_Previews: PreviewProvider {
     static var previews: some View {
-        CellView(task: Task(title: "제목", content: "내용", date: .now))
+        CellView(task: TodoView.ViewModel.mock.todos[0])
     }
 }
