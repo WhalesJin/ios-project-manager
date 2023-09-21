@@ -11,9 +11,13 @@ import FirebaseFirestore
 
 @main
 struct ProjectManagerApp: App {
+    
+    @ObservedObject var kanbanViewModel = KanbanViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            TodoView()
+            KanbanView()
+                .environmentObject(kanbanViewModel)
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ListView: View {
+struct KanbanSectionView: View {
     var tasks: [Task]
     let title: String
     
@@ -15,20 +15,20 @@ struct ListView: View {
         List {
             Section {
                 ForEach(tasks) { task in
-                    CellView(task: task)
+                    TaskCellView(task: task)                        
                 }
             } header: {
                 Text("\(title)")
                     .font(.title)
                     .foregroundColor(.primary)
-            }
+            }            
         }
         .listStyle(.grouped)
     }
 }
 
-struct ListView_Previews: PreviewProvider {
+struct KanbanSectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView(tasks: TodoView.ViewModel.mock.todos, title: "TODO")
+        KanbanSectionView(tasks: KanbanViewModel.mock.todos, title: "TODO")
     }
 }
