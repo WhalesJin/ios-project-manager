@@ -22,6 +22,15 @@ final class TaskFormViewModel: ObservableObject {
     }
     
     func makeTask() -> Task {
-        return Task(title: title, content: content, date: date)
+        return Task(title: title, content: content, date: date, state: .todo)
+    }
+    
+    func updateTask(original: Task) -> Task {
+        var task = original
+        task.title = title
+        task.content = content
+        task.date = date
+        
+        return task
     }
 }

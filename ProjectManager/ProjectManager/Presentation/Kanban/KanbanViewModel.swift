@@ -8,29 +8,43 @@ import SwiftUI
 
 
 final class KanbanViewModel: ObservableObject {
-    @Published var todos: [Task]
-    @Published var doings: [Task]
-    @Published var dones: [Task]
+    @Published var tasks: [Task]
     
     @Published var isFormViewOn: Bool
     @Published var selectedTask: Task?
     
+    var todoTasks: [Task] {
+        tasks.filter { $0.state == .todo }
+    }
+    
+    var doingTasks: [Task] {
+        tasks.filter { $0.state == .doing }
+    }
+    
+    var doneTasks: [Task] {
+        tasks.filter { $0.state == .done}
+    }
+    
     init(
-        todos: [Task] = [],
-        doings: [Task] = [],
-        dones: [Task] = [],
+        tasks: [Task] = [],
         isFormViewOn: Bool = false,
         selectedTask: Task? = nil
     ) {
-        self.todos = todos
-        self.doings = doings
-        self.dones = dones
+        self.tasks = tasks
         self.isFormViewOn = isFormViewOn
         self.selectedTask = selectedTask
     }
     
     func create(new task: Task) {
-        todos.append(task)
+        tasks.append(task)
+    }
+    
+    func update(updatedTask: Task) {
+        guard let index = tasks.firstIndex(where: { task in
+            task.id == updatedTask.id
+        }) else { return }
+        
+        tasks[index] = updatedTask        
     }
     
     func presentCreateFormView() {
@@ -53,21 +67,15 @@ final class KanbanViewModel: ObservableObject {
 
 extension KanbanViewModel {
     static let mock = KanbanViewModel (
-        todos: [
-            Task(title: "제목1", content: "내용", date: .now),
-            Task(title: "제목2", content: "내용", date: .now),
-            Task(title: "제목3", content: "내용", date: .now),
-            Task(title: "제목4", content: "내용", date: .now),
-            Task(title: "제목5", content: "내용", date: .now),
-        ],
-        doings: [
-            Task(title: "제목1", content: "내용", date: .now),
-            Task(title: "제목2", content: "내용", date: .now),
-        ],
-        dones: [
-            Task(title: "제목1", content: "내용", date: .now),
-            Task(title: "제목2", content: "내용", date: .now),
-            Task(title: "제목3", content: "내용", date: .now),
+        tasks: [
+            Task(title: "제목1", content: "내용", date: .now, state: .todo),
+            Task(title: "제목2", content: "내용", date: .now, state: .todo),
+            Task(title: "제목3", content: "내용", date: .now, state: .todo),
+            Task(title: "제목4", content: "내용", date: .now, state: .doing),
+            Task(title: "제목5", content: "내용", date: .now, state: .doing),
+            Task(title: "제목6", content: "내용", date: .now, state: .done),
+            Task(title: "제목7", content: "내용", date: .now, state: .done),
+            Task(title: "제목8", content: "내용", date: .now, state: .done),
         ]
     )
 }

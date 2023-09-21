@@ -29,6 +29,6 @@ struct KanbanSectionView: View {
 
 struct KanbanSectionView_Previews: PreviewProvider {
     static var previews: some View {
-        KanbanSectionView(tasks: KanbanViewModel.mock.todos, title: "TODO")
+        KanbanSectionView(tasks: KanbanViewModel.mock.tasks, title: "TODO")
     }
 }

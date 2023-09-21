@@ -74,13 +74,17 @@ struct TaskFormView: View {
             } else {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Edit") {
-                        vm.isEditable.toggle()
+                        vm.isEditable = true
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
-                        //TODO: 수정 반영하고 나가기
+                        if let task = self.task, vm.isEditable {
+                            let updated = vm.updateTask(original: task)
+                            kanbanVM.update(updatedTask: updated)
+                        }
+                        
                         kanbanVM.dismissDetailFormView()
                     }
                 }
@@ -92,7 +96,7 @@ struct TaskFormView: View {
 struct TaskFormView_Previews: PreviewProvider {
     @ObservedObject static var kanbanVM = KanbanViewModel.mock    
     static var previews: some View {
-        TaskFormView(task: kanbanVM.todos[0])
+        TaskFormView(task: kanbanVM.tasks[0])
             .environmentObject(kanbanVM)
     }
 }

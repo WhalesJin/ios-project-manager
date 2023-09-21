@@ -12,4 +12,11 @@ struct Task: Identifiable {
     var title: String
     var content: String
     var date: Date
+    var state: TaskState
+}
+
+enum TaskState: Int {
+    case todo = 1
+    case doing = 2
+    case done = 3
 }

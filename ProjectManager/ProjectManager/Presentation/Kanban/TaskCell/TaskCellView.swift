@@ -33,6 +33,6 @@ struct TaskCellView: View {
 
 struct TaskCellView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskCellView(task: KanbanViewModel.mock.todos[0])
+        TaskCellView(task: KanbanViewModel.mock.tasks[0])
     }
 }

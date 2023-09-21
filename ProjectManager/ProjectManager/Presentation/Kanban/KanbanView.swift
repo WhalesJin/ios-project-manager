@@ -13,9 +13,9 @@ struct KanbanView: View {
     var body: some View {        
         NavigationStack {
             HStack(spacing: 10) {
-                KanbanSectionView(tasks: kanbanVM.todos, title: "TODO")
-                KanbanSectionView(tasks: kanbanVM.doings, title: "DOING")
-                KanbanSectionView(tasks: kanbanVM.dones, title: "DONE")
+                KanbanSectionView(tasks: kanbanVM.todoTasks, title: "TODO")
+                KanbanSectionView(tasks: kanbanVM.doingTasks, title: "DOING")
+                KanbanSectionView(tasks: kanbanVM.doneTasks, title: "DONE")
             }
             .background(.quaternary)
             .navigationTitle("Project Manager")
