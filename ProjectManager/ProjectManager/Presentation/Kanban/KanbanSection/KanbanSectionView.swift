@@ -15,13 +15,22 @@ struct KanbanSectionView: View {
         List {
             Section {
                 ForEach(tasks) { task in
-                    TaskCellView(task: task)                        
+                    TaskCellView(task: task)
                 }
             } header: {
-                Text("\(title)")
-                    .font(.title)
-                    .foregroundColor(.primary)
-            }            
+                HStack {
+                    Text("\(title)")
+                        .font(.title)
+                        .foregroundColor(.primary)
+                    Text("\(tasks.count)")
+                        .foregroundColor(.white)
+                        .bold()
+                        .padding(6)
+                        .background {
+                            Circle().fill(.black)
+                        }
+                }                
+            }
         }
         .listStyle(.grouped)
     }
