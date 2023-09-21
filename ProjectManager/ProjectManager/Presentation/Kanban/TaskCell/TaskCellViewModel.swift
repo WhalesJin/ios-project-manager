@@ -7,13 +7,21 @@
 
 import Foundation
 
-final class TaskCellViewModel: ObservableObject {
+struct TaskCellViewModel {
     
-    func isOverdued(date: Date) -> Bool {
+    let task: Task
+    
+    var date: String {
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        formatter.dateFormat = "YYYY. M. d"        
+        return formatter.string(from: task.date)
+    }
+    
+    var isOverdued: Bool {
         let calendar = Calendar.current
         let now = Date()
         
-        return calendar.compare(date, to: now, toGranularity: .day) == .orderedAscending
+        return calendar.compare(task.date, to: now, toGranularity: .day) == .orderedAscending
     }
-
 }

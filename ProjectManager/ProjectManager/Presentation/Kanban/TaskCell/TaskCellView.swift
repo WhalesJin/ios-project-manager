@@ -9,27 +9,30 @@ import SwiftUI
 
 struct TaskCellView: View {
     @EnvironmentObject var kanbanVM: KanbanViewModel
-    @ObservedObject var vm = TaskCellViewModel()
-    var task: Task
+    let vm: TaskCellViewModel
+    
+    init(task: Task) {
+        self.vm = TaskCellViewModel(task: task)
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("\(task.title)")
+            Text("\(vm.task.title)")
                 .font(.title3)
                 .lineLimit(1)
-            Text("\(task.content)")
+            Text("\(vm.task.content)")
                 .foregroundColor(.secondary)
                 .lineLimit(3)
-            Text("\(task.date)")
-                .foregroundColor(vm.isOverdued(date: task.date) ? .red : .primary)
+            Text("\(vm.date)")
+                .foregroundColor(vm.isOverdued ? .red : .primary)
                 .font(.footnote)
         }
         .onTapGesture {
-            kanbanVM.presentDetailFormView(task: task)
+            kanbanVM.presentDetailFormView(task: vm.task)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button("Delete", role: .destructive) {
-                kanbanVM.delete(task)
+                kanbanVM.delete(vm.task)
             }
         }
     }

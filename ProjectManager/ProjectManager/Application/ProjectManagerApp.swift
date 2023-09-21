@@ -12,7 +12,7 @@ import FirebaseFirestore
 @main
 struct ProjectManagerApp: App {
     
-    @ObservedObject var kanbanViewModel = KanbanViewModel()
+    @ObservedObject var kanbanViewModel = KanbanViewModel.mock
     
     var body: some Scene {
         WindowGroup {
