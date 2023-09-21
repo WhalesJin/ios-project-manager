@@ -18,6 +18,9 @@ struct CustomBoolAlert<Alert: View>: ViewModifier {
             if isOn {
                 Color.black.opacity(0.5)
                     .ignoresSafeArea()
+                    .onTapGesture {
+                        isOn = false
+                    }
                 NavigationStack {
                     alertView
                         .navigationTitle(title)
@@ -41,6 +44,9 @@ struct CustomValueAlert<T, Alert: View>: ViewModifier {
             if value != nil {
                 Color.black.opacity(0.5)
                     .ignoresSafeArea()
+                    .onTapGesture {
+                        value = nil
+                    }
                 NavigationStack {
                     alertView
                         .navigationTitle(title)

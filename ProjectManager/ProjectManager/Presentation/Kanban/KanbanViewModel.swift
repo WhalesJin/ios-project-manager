@@ -53,6 +53,14 @@ final class KanbanViewModel: ObservableObject {
         }
     }
     
+    func move(_ target: Task, to state: TaskState) {
+        guard let index = tasks.firstIndex(where: { task in
+            task.id == target.id
+        }) else { return }
+        
+        tasks[index].state = state
+    }
+    
     func presentCreateFormView() {
         isFormViewOn = true
     }

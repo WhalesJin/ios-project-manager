@@ -30,6 +30,19 @@ struct TaskCellView: View {
         .onTapGesture {
             kanbanVM.presentDetailFormView(task: vm.task)
         }
+        .contextMenu(menuItems: {
+            switch vm.task.state {
+            case .todo:
+                Button("Move to DOING"){ kanbanVM.move(vm.task, to: .doing) }
+                Button("Move to DONE"){ kanbanVM.move(vm.task, to: .done) }
+            case .doing:
+                Button("Move to TODO"){ kanbanVM.move(vm.task, to: .todo) }
+                Button("Move to DONE"){ kanbanVM.move(vm.task, to: .done) }
+            case .done:
+                Button("Move to TODO"){ kanbanVM.move(vm.task, to: .todo) }
+                Button("Move to DOING"){ kanbanVM.move(vm.task, to: .doing) }
+            }
+        })
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button("Delete", role: .destructive) {
                 kanbanVM.delete(vm.task)
