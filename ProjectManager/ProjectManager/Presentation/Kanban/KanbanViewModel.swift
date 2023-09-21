@@ -47,6 +47,12 @@ final class KanbanViewModel: ObservableObject {
         tasks[index] = updatedTask        
     }
     
+    func delete(_ target: Task) {
+        tasks.removeAll { task in
+            task.id == target.id
+        }
+    }
+    
     func presentCreateFormView() {
         isFormViewOn = true
     }

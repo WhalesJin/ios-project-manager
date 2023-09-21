@@ -24,9 +24,13 @@ struct TaskCellView: View {
                 .foregroundColor(vm.isOverdued(date: task.date) ? .red : .primary)
                 .font(.footnote)
         }
-        
         .onTapGesture {
             kanbanVM.presentDetailFormView(task: task)
+        }
+        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+            Button("Delete", role: .destructive) {
+                kanbanVM.delete(task)
+            }
         }
     }
 }
