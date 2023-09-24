@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-struct TaskCellView: View {
-    @EnvironmentObject var kanbanVM: KanbanViewModel
-    let vm: TaskCellViewModel
+struct CardView: View {
+    @EnvironmentObject private var kanbanVM: KanbanViewModel
+    private let vm: CardViewModel
     
     init(task: Task) {
-        self.vm = TaskCellViewModel(task: task)
+        self.vm = CardViewModel(task: task)
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("\(vm.task.title)")
+            Text(vm.task.title)
                 .font(.title3)
                 .lineLimit(1)
-            Text("\(vm.task.content)")
+            Text(vm.task.content)
                 .foregroundColor(.secondary)
                 .lineLimit(3)
             Text("\(vm.date)")
@@ -53,6 +53,6 @@ struct TaskCellView: View {
 
 struct TaskCellView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskCellView(task: KanbanViewModel.mock.tasks[0])
+        CardView(task: KanbanViewModel.mock.tasks[0])
     }
 }

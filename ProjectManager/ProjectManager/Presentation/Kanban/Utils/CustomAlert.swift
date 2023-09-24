@@ -7,29 +7,52 @@
 
 import SwiftUI
 
-struct CustomBoolAlert<Alert: View>: ViewModifier {
+struct CustomBoolAlert<AlertContent: View>: ViewModifier {
     @Binding var isOn: Bool
     let title: String
-    let alertView: Alert
+    let alertContent: AlertContent
+    
+    @ObservedObject var keyboard = KeyboardManager()
     
     func body(content: Content) -> some View {
-        ZStack {
-            content
-            if isOn {
-                Color.black.opacity(0.5)
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        isOn = false
+        GeometryReader { geo in
+            let width = geo.size.width * 0.5
+            let height = geo.size.height * 0.8 + (keyboard.height * 0.8)
+            
+            ZStack {
+                content
+                if isOn {
+                    bluredBackground
+                    ScrollView(showsIndicators: false) {
+                        alertView
+                            .frame(width: width, height: height)
                     }
-                NavigationStack {
-                    alertView
-                        .navigationTitle(title)
-                        .navigationBarTitleDisplayMode(.inline)
-                }                
-                .cornerRadius(10)
-                .frame(width: 500, height: 600)
+                    .scrollDisabled(keyboard.height == .zero)
+                }
             }
         }
+    }
+    
+    var alertView: some View {
+        NavigationStack {
+            alertContent
+                .navigationTitle(title)
+                .navigationBarTitleDisplayMode(.inline)
+        }
+        .cornerRadius(10)
+    }
+    
+    var bluredBackground: some View {
+        Color.black.opacity(0.5)
+            .ignoresSafeArea()
+            .onTapGesture {
+                guard keyboard.height == .zero else {
+                    keyboard.hide()
+                    return
+                }
+                
+                isOn = false
+            }
     }
 }
 
@@ -63,13 +86,13 @@ extension View {
     func customAlert<Alert: View>(
         isOn: Binding<Bool>,
         title: String,
-        alertView: @escaping () -> Alert
+        content: @escaping () -> Alert
     ) -> some View {
         modifier(
             CustomBoolAlert(
                 isOn: isOn,
                 title: title,
-                alertView: alertView()
+                alertContent: content()
             )
         )
     }

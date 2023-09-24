@@ -7,19 +7,24 @@
 
 import SwiftUI
 
-struct KanbanSectionView: View {
-    var tasks: [Task]
-    let title: String
+struct ColumnView: View {
+    private let tasks: [Task]
+    private let title: String
+    
+    init(tasks: [Task], title: String) {
+        self.tasks = tasks
+        self.title = title
+    }
     
     var body: some View {
         List {
             Section {
                 ForEach(tasks) { task in
-                    TaskCellView(task: task)
+                    CardView(task: task)
                 }
             } header: {
                 HStack {
-                    Text("\(title)")
+                    Text(title)
                         .font(.title)
                         .foregroundColor(.primary)
                     Text("\(tasks.count)")
@@ -38,6 +43,6 @@ struct KanbanSectionView: View {
 
 struct KanbanSectionView_Previews: PreviewProvider {
     static var previews: some View {
-        KanbanSectionView(tasks: KanbanViewModel.mock.tasks, title: "TODO")
+        ColumnView(tasks: KanbanViewModel.mock.tasks, title: "TODO")
     }
 }

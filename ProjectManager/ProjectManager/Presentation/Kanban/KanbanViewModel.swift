@@ -8,7 +8,7 @@ import SwiftUI
 
 
 final class KanbanViewModel: ObservableObject {
-    @Published var tasks: [Task]
+    @Published private(set) var tasks: [Task]
     
     @Published var isFormViewOn: Bool
     @Published var selectedTask: Task?
@@ -61,13 +61,9 @@ final class KanbanViewModel: ObservableObject {
         tasks[index].state = state
     }
     
-    func presentCreateFormView() {
-        isFormViewOn = true
-    }
-    
-    func dismissCreateFormView() {
-        isFormViewOn = false
-    }
+    func setFormViewVisible(_ isVisible: Bool) {
+        isFormViewOn = isVisible
+    }    
     
     func presentDetailFormView(task: Task) {
         selectedTask = task

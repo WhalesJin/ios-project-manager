@@ -7,15 +7,12 @@
 
 import Foundation
 
-struct TaskCellViewModel {
+struct CardViewModel {
     
     let task: Task
     
     var date: String {
-        let formatter = DateFormatter()
-        formatter.locale = .current
-        formatter.dateFormat = "YYYY. M. d"        
-        return formatter.string(from: task.date)
+        return task.date.formatted(date: .numeric, time: .omitted)
     }
     
     var isOverdued: Bool {

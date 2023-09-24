@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct KanbanView: View {
-    @EnvironmentObject var kanbanVM: KanbanViewModel
+    @EnvironmentObject private var kanbanVM: KanbanViewModel
     
-    var body: some View {        
+    var body: some View {
         NavigationStack {
             HStack(spacing: 10) {
-                KanbanSectionView(tasks: kanbanVM.todoTasks, title: "TODO")
-                KanbanSectionView(tasks: kanbanVM.doingTasks, title: "DOING")
-                KanbanSectionView(tasks: kanbanVM.doneTasks, title: "DONE")
+                ColumnView(tasks: kanbanVM.todoTasks, title: "TODO")
+                ColumnView(tasks: kanbanVM.doingTasks, title: "DOING")
+                ColumnView(tasks: kanbanVM.doneTasks, title: "DONE")
             }
             .background(.quaternary)
             .navigationTitle("Project Manager")
@@ -24,19 +24,22 @@ struct KanbanView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        kanbanVM.presentCreateFormView()
+                        kanbanVM.setFormViewVisible(true)
                     } label: {
                         Image(systemName: "plus")
                     }
                 }
             }
         }
-        .customAlert(isOn: $kanbanVM.isFormViewOn, title: "Todo") {
+        .customAlert(
+            isOn: $kanbanVM.isFormViewOn,
+            title: "Todo"
+        ) {
             TaskFormView()
         }
         .customAlert(selected: $kanbanVM.selectedTask, title: "Todo") {
             TaskFormView(task: kanbanVM.selectedTask)
-        }
+        }        
     }
 }
 

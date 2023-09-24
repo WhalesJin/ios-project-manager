@@ -14,15 +14,25 @@ final class TaskFormViewModel: ObservableObject {
     
     @Published var isEditable: Bool
     
-    init(title: String = "", date: Date = .now, content: String = "", isEditable: Bool) {
+    init(
+        title: String = "",
+        date: Date = .now,
+        content: String = "",
+        isEditable: Bool
+    ) {
         self.title = title
         self.date = date
         self.content = content
         self.isEditable = isEditable
     }
     
-    func makeTask() -> Task {
-        return Task(title: title, content: content, date: date, state: .todo)
+    var task: Task {
+        Task(
+            title: title,
+            content: content,
+            date: date,
+            state: .todo
+        )
     }
     
     func updateTask(original: Task) -> Task {

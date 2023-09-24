@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TaskFormView: View {
-    @EnvironmentObject var kanbanVM: KanbanViewModel
-    @ObservedObject var vm: TaskFormViewModel
+    @EnvironmentObject private var kanbanVM: KanbanViewModel
+    @ObservedObject private var vm: TaskFormViewModel
     let task: Task?
     
     init(task: Task? = nil) {
@@ -31,44 +31,30 @@ struct TaskFormView: View {
     var body: some View {
         VStack {
             TextField("할 일 제목을 입력하세요", text: $vm.title)
-                .padding(8)
-                .disabled(!vm.isEditable)
-                .background {
-                    Rectangle()
-                        .fill(.background)
-                        .shadow(color: .secondary, radius: 3, x: 2, y: 2)
-                }
+                .shadowBackground()
             
-                
             DatePicker("날짜를 입력하세요", selection: $vm.date, displayedComponents: [.date])
                 .labelsHidden()
-                .disabled(!vm.isEditable)
                 .datePickerStyle(.wheel)
             
-            TextEditor(text: $vm.content)
-                .padding(8)
-                .disabled(!vm.isEditable)
-                .background {
-                    Rectangle()
-                        .fill(.background)
-                        .shadow(color: .secondary, radius: 3, x: 2, y: 2)
-                }
+            TextEditor(text: $vm.content)                
+                .shadowBackground()
         }
+        .disabled(!vm.isEditable)
         .padding()
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbar {
             if task == nil {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
-                        kanbanVM.dismissCreateFormView()
+                        kanbanVM.setFormViewVisible(false)
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
-                        let task = vm.makeTask()
-                        kanbanVM.create(new: task)
-                        kanbanVM.dismissCreateFormView()
+                        kanbanVM.create(new: vm.task)
+                        kanbanVM.setFormViewVisible(false)
                     }
                 }
             } else {
