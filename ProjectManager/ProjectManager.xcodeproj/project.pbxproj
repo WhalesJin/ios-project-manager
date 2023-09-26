@@ -18,7 +18,6 @@
 		1F6F24142ABC51C7000F04B3 /* TaskFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6F24132ABC51C7000F04B3 /* TaskFormViewModel.swift */; };
 		1F6F24182ABC5222000F04B3 /* ColumnViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6F24172ABC5222000F04B3 /* ColumnViewModel.swift */; };
 		1F6F241B2ABC6D9B000F04B3 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6F241A2ABC6D9B000F04B3 /* CardViewModel.swift */; };
-		1F773D8D2AC09DE40090C81C /* KeyboardManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F773D8C2AC09DE40090C81C /* KeyboardManger.swift */; };
 		3C314EC32AB99D39001BDF45 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3C314EC22AB99D39001BDF45 /* Realm */; };
 		3C314EC52AB99D39001BDF45 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C314EC42AB99D39001BDF45 /* RealmSwift */; };
 		3C314EC82AB99FA9001BDF45 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3C314EC72AB99FA9001BDF45 /* FirebaseFirestore */; };
@@ -43,7 +42,6 @@
 		1F6F24132ABC51C7000F04B3 /* TaskFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFormViewModel.swift; sourceTree = "<group>"; };
 		1F6F24172ABC5222000F04B3 /* ColumnViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnViewModel.swift; sourceTree = "<group>"; };
 		1F6F241A2ABC6D9B000F04B3 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
-		1F773D8C2AC09DE40090C81C /* KeyboardManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManger.swift; sourceTree = "<group>"; };
 		3C314ECD2AB9A526001BDF45 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3C314ED62ABACC71001BDF45 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		3C314ED82ABACE3F001BDF45 /* ColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnView.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 			children = (
 				1F4926162ABB53E5002663A4 /* CustomAlert.swift */,
 				1F46A20A2AC05B6D001C7564 /* ShadowBackground.swift */,
-				1F773D8C2AC09DE40090C81C /* KeyboardManger.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -286,7 +283,6 @@
 				3C314ED72ABACC71001BDF45 /* CardView.swift in Sources */,
 				1F4926172ABB53E5002663A4 /* CustomAlert.swift in Sources */,
 				1F223ACD2ABAE76500EDB1E9 /* TaskFormView.swift in Sources */,
-				1F773D8D2AC09DE40090C81C /* KeyboardManger.swift in Sources */,
 				3C314ED92ABACE3F001BDF45 /* ColumnView.swift in Sources */,
 				1F223AC32ABAC3F200EDB1E9 /* KanbanView.swift in Sources */,
 				1F223ABA2ABAC21600EDB1E9 /* Task.swift in Sources */,

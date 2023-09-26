@@ -32,62 +32,64 @@ struct TaskFormView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                TextField("할 일 제목을 입력하세요", text: $vm.title)
-                    .shadowBackground()
-                
-                DatePicker("날짜를 입력하세요", selection: $vm.date, displayedComponents: [.date])
-                    .labelsHidden()
-                    .datePickerStyle(.wheel)
-                
-                TextEditor(text: $vm.content)
-                    .shadowBackground()
-//                    .frame(minHeight: formSize.height * 0.5)
-//                Spacer()
-            }
-            //                .disabled(!vm.isEditable)
-            .padding()
-            .toolbarBackground(.visible, for: .navigationBar)
-            .toolbar {
-                if task == nil {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button("Cancel") {
-                            kanbanVM.setFormViewVisible(false)
-                        }
-                    }
+        NavigationStack {
+            ScrollView {
+                VStack {
+                    TextField("할 일 제목을 입력하세요", text: $vm.title)
+                        .shadowBackground()
                     
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("Done") {
-                            kanbanVM.create(new: vm.task)
-                            kanbanVM.setFormViewVisible(false)
-                        }
-                    }
-                } else {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button("Edit") {
-                            vm.isEditable = true
-                        }
-                    }
+                    DatePicker("날짜를 입력하세요", selection: $vm.date, displayedComponents: [.date])
+                        .labelsHidden()
+                        .datePickerStyle(.wheel)
                     
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("Done") {
-                            if let task = self.task, vm.isEditable {
-                                let updated = vm.updateTask(original: task)
-                                kanbanVM.update(updatedTask: updated)
+                    TextEditor(text: $vm.content)
+                        .shadowBackground()
+                        .frame(minHeight: formSize.width * 0.6 * 0.5)
+                }
+                .disabled(!vm.isEditable)
+                .padding()
+                .toolbarBackground(.visible, for: .navigationBar)
+                .toolbar {
+                    if task == nil {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button("Cancel") {
+                                kanbanVM.setFormViewVisible(false)
                             }
-                            
-                            kanbanVM.dismissDetailFormView()
+                        }
+                        
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Done") {
+                                kanbanVM.create(new: vm.task)
+                                kanbanVM.setFormViewVisible(false)
+                            }
+                        }
+                    } else {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button("Edit") {
+                                vm.isEditable = true
+                            }
+                        }
+                        
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Done") {
+                                if let task = self.task, vm.isEditable {
+                                    let updated = vm.updateTask(original: task)
+                                    kanbanVM.update(updatedTask: updated)
+                                }
+                                
+                                kanbanVM.dismissDetailFormView()
+                            }
                         }
                     }
                 }
+                .navigationTitle("Todo")
+                .navigationBarTitleDisplayMode(.inline)
             }
-            //            }
         }
-        .frame(width: formSize.width, height: formSize.height)
+        .frame(width: formSize.width * 0.45, height: formSize.width * 0.6)
+        .cornerRadius(10)
     }
 }
-
 //struct TaskFormView_Previews: PreviewProvider {
 //    @ObservedObject static var kanbanVM = KanbanViewModel.mock
 //    static var previews: some View {
