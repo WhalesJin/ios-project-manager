@@ -10,32 +10,29 @@ import SwiftUI
 struct CustomBoolAlert<AlertContent: View>: ViewModifier {
     @Binding var isOn: Bool
     let title: String
-    let alertContent: AlertContent
+    let alertContent: (CGSize) -> AlertContent
     
     @ObservedObject var keyboard = KeyboardManager()
     
     func body(content: Content) -> some View {
         GeometryReader { geo in
-            let width = geo.size.width * 0.5
-            let height = geo.size.height * 0.8 + (keyboard.height * 0.8)
+            let width = geo.size.width * 0.45
+            let height = width * (6 / 5)
             
             ZStack {
                 content
                 if isOn {
                     bluredBackground
-                    ScrollView(showsIndicators: false) {
-                        alertView
-                            .frame(width: width, height: height)
-                    }
-                    .scrollDisabled(keyboard.height == .zero)
+                    alertView(CGSize(width: width, height: height))
+                        .frame(width: width, height: height)
                 }
             }
         }
     }
     
-    var alertView: some View {
+    func alertView(_ size: CGSize) -> some View {
         NavigationStack {
-            alertContent
+            alertContent(size)
                 .navigationTitle(title)
                 .navigationBarTitleDisplayMode(.inline)
         }
@@ -86,13 +83,13 @@ extension View {
     func customAlert<Alert: View>(
         isOn: Binding<Bool>,
         title: String,
-        content: @escaping () -> Alert
+        content: @escaping (_ size: CGSize) -> Alert
     ) -> some View {
         modifier(
             CustomBoolAlert(
                 isOn: isOn,
                 title: title,
-                alertContent: content()
+                alertContent: content
             )
         )
     }

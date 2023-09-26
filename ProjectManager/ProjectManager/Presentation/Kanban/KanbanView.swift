@@ -34,12 +34,12 @@ struct KanbanView: View {
         .customAlert(
             isOn: $kanbanVM.isFormViewOn,
             title: "Todo"
-        ) {
-            TaskFormView()
+        ) { size in
+            TaskFormView(formSize: size)
         }
-        .customAlert(selected: $kanbanVM.selectedTask, title: "Todo") {
-            TaskFormView(task: kanbanVM.selectedTask)
-        }        
+//        .customAlert(selected: $kanbanVM.selectedTask, title: "Todo") {
+////            TaskFormView(task: kanbanVM.selectedTask, formSize: <#CGSize#>)
+//        }        
     }
 }
 
