@@ -43,6 +43,10 @@ struct CardView: View {
                 kanbanViewModel.delete(cardViewModel.task)
             }
         }
+        .onTapGesture {
+            kanbanViewModel.setEditFormVisible(true)
+            kanbanViewModel.setSelectedTask(cardViewModel.task)
+        }
     }
 }
 

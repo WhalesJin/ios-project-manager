@@ -9,6 +9,8 @@ import SwiftUI
 final class KanbanViewModel: ObservableObject {
     @Published var tasks: [Task]
     @Published var isFormOn: Bool = false
+    @Published var isEditFormOn: Bool = false
+    @Published var selectedTask: Task
     
     var todos: [Task] {
         return tasks.filter { $0.state == .todo }
@@ -22,7 +24,9 @@ final class KanbanViewModel: ObservableObject {
         return tasks.filter { $0.state == .done }
     }
     
-    init(tasks: [Task] = []) {
+    init(tasks: [Task] = [], selectedTask: Task = Task(title: "", content: "", date: .now, state: .todo)) {
+        self.selectedTask = selectedTask
+        
         self.tasks = tasks
         self.tasks.sort { $0.date < $1.date }
     }
@@ -36,6 +40,14 @@ final class KanbanViewModel: ObservableObject {
         isFormOn = isVisible
     }
     
+    func setEditFormVisible(_ isVisible: Bool) {
+        isEditFormOn = isVisible
+    }
+    
+    func setSelectedTask(_ task: Task) {
+        selectedTask = task
+    }
+    
     func move(_ task: Task, to state: TaskState) {
         guard let index = tasks.firstIndex(of: task) else { return }
         withAnimation {
@@ -46,6 +58,13 @@ final class KanbanViewModel: ObservableObject {
     func delete(_ task: Task) {
         guard let index = tasks.firstIndex(of: task) else { return }
         tasks.remove(at: index)
+    }
+    
+    func edit(_ task: Task, newTask: Task) {
+        guard let index = tasks.firstIndex(of: task) else { return }
+        tasks[index].title = newTask.title
+        tasks[index].content = newTask.content
+        tasks[index].date = newTask.date
     }
 }
 

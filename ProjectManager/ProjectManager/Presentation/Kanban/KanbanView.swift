@@ -39,6 +39,9 @@ struct KanbanView: View {
             .customAlert(isOn: $kanbanViewModel.isFormOn) {
                 TaskFormView(title: "Todo", size: geo.size)
             }
+            .customAlert(isOn: $kanbanViewModel.isEditFormOn) {
+                EditTaskView(task: kanbanViewModel.selectedTask)
+            }
         }
         .environmentObject(kanbanViewModel)
         .ignoresSafeArea(.keyboard, edges: .bottom)
