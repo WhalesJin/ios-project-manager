@@ -22,6 +22,12 @@ struct ColumnView: View {
                 ForEach(tasks) { task in
                     CardView(task: task)
                 }
+                .listRowInsets(EdgeInsets(top: 20, leading: 10, bottom: 10, trailing: 10))
+                .listRowBackground(
+                    Rectangle()
+                        .fill(.white)
+                        .padding(.top, 10)
+                )
             } header: {
                 HStack {
                     Text(title)

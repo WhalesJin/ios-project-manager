@@ -12,6 +12,10 @@ final class KanbanViewModel: ObservableObject {
     @Published var isEditFormOn: Bool = false
     @Published var selectedTask: Task
     
+    // task 관찰. UseCase에 만들어서 여기는 연산프로퍼티로. 수정은 UseCase에서
+    // UC는 레포지토리랑 나눠서 소통을 하는데 지금은 거까진 안해도 될 것 같고,
+    // 비즈니스 로직을 정의하고 뷰모델은 유즈한테 이거 해줘.
+    
     var todos: [Task] {
         return tasks.filter { $0.state == .todo }
     }
