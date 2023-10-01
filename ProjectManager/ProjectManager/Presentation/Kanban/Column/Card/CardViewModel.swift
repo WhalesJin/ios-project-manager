@@ -5,6 +5,8 @@
 //  Created by Minsup & Whales on 2023/09/22.
 //
 
+/// test
+
 import Foundation
 
 final class CardViewModel {
