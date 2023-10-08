@@ -16,6 +16,7 @@ final class UserManager: ObservableObject {
     
     @Published var inputEmail: String = ""
     @Published var isRegisterFormOn: Bool
+    @Published var isCloudPopoverOn: Bool = false
     
     init(userUseCases: UserUseCases) {
         self.userUseCases = userUseCases
@@ -41,7 +42,7 @@ final class UserManager: ObservableObject {
     func logout() {
         userUseCases.logout()
         user = nil
-        isRegisterFormOn = false
+        isCloudPopoverOn = false
     }
     
     private func turnOffFirstLaunch() {

@@ -9,15 +9,14 @@ import SwiftUI
 
 struct ConnectedButton: View {
     @EnvironmentObject private var userManager: UserManager
-    @State private var showingPopover: Bool = false
     
     var body: some View {
         Button {
-            showingPopover = true
+            userManager.isCloudPopoverOn = true
         } label: {
             Image(systemName: "icloud")
         }
-        .popover(isPresented: $showingPopover) {
+        .popover(isPresented: $userManager.isCloudPopoverOn) {
             VStack(alignment: .trailing, spacing: 10) {
                 HStack {
                     Text(userManager.user?.email ?? "")
